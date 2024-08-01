@@ -1,4 +1,4 @@
-import Perfil from "../components/Perfil.jsx/Perfil";
+import Perfil from "./Perfil";
 import { useParams } from "react-router-dom";
 
 

@@ -1,6 +1,6 @@
 /*eslint-disable no-unused-vars*/
 import { Container, Box, Input, Card, Text, Button, FormControl, FormLabel, Center, CircularProgress } from '@chakra-ui/react';
-import image from '../assets/background.jpg';
+import image from '../assets/sun.jpg';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -107,7 +107,7 @@ const LogIn = () => {
                                 textAlign={'center'}
                                 justifyContent="center"
                                 alignItems="center"
-                                bg="white"
+                                bg="gray.100"
                                 variant="outline"
                                 boxShadow="dark-lg"
                                 p={10}

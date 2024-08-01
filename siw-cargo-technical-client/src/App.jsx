@@ -6,6 +6,7 @@ import UpdateUser from './views/UpdateUser';
 import Register from './views/Register'
 import { Routes, Route } from 'react-router-dom';
 import { PrivateRoute } from './router/PrivateRoute';
+import Perfil from './views/Perfil';
 
 
 
@@ -19,7 +20,7 @@ function App() {
         <Route path='/registro' element={<Register />} />
         <Route path='/facturas' element={
           <PrivateRoute>
-            <Home />
+            <Perfil />
           </PrivateRoute>} />
       </Routes>
 

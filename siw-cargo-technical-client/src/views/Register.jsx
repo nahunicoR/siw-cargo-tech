@@ -1,7 +1,7 @@
 /*eslint-disable no-unused-vars*/
 
 import { Container, Box, Input, Card, Text, Button, FormControl, FormLabel, CircularProgress, Center } from '@chakra-ui/react';
-import image from '../assets/background.jpg';
+import image from '../assets/background.png';
 import { useState, useEffect } from 'react';
 import { register } from '../services/services';
 import { useNavigate } from 'react-router-dom';

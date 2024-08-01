@@ -2,10 +2,10 @@
 
 import { Flex, Center, Box, Text, Button, CircularProgress } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { getFacturas } from '../../services/services';
+import { getFacturas } from '../services/services.js';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import FacturaCard from '../FacturaCard.jsx'
+import FacturaCard from '../components/FacturaCard.jsx'
 
 
 
@@ -55,7 +55,7 @@ const Perfil = () => {
                             <Box>
 
                                 <Text
-                                    color={'gray.800'}
+                                    color={'gray.700'}
                                     fontSize={'3xl'}
                                     fontWeight={'bold'}
                                     textAlign={'center'}
@@ -65,18 +65,14 @@ const Perfil = () => {
                                     Bienvenido aquí podrás ver tus facturas
                                 </Text>
                                 <Text
-                                    color={'gray.800'}
+                                    color={'gray.600'}
                                     fontSize={'3xl'}
                                     textAlign={'center'}
+                                    marginBottom={'10%'}
+                                    textDecoration={'underline'}
+                                    textShadow={'2px 2px 4px #000000'}
                                 >
                                     {user.nombre}
-                                </Text>
-                                <Text
-                                    textAlign={'center'}
-                                    color={'gray.500'}
-                                    fontSize={'3xl'}
-                                >
-                                    Welcome
                                 </Text>
                             </Box>
                             <Button
@@ -97,7 +93,7 @@ const Perfil = () => {
                         >
                             <Box>
                                 <Text
-                                    color={'gray.800'}
+                                    color={'blue.300'}
                                     fontSize={'3xl'}
                                     fontWeight={'bold'}
                                     textAlign={'center'}
