@@ -110,13 +110,14 @@ const Perfil = () => {
                                 gap={'10px'}
                             >
                                 {facturas && facturas.map((factura) => (
-                                    <Box key={factura.facturaid} margin={'10px'} >
-                                        <FacturaCard
-                                            cliente={factura.cliente}
-                                            total={factura.total}
-                                            fecha={factura.fecha}
-                                        />
-                                    </Box>
+
+                                    <FacturaCard
+                                        key={factura.idfactura}
+                                        cliente={factura.cliente}
+                                        total={factura.total}
+                                        fecha={factura.fecha}
+                                    />
+
                                 ))}
                             </Box>
                         </Box>

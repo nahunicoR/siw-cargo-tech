@@ -18,6 +18,7 @@ const FacturaCard = ({ total, fecha }) => {
                 display={'flex'}
                 flexDirection={'column'}
                 justifyContent={'space-between'}
+                margin={'10px'}
             >
                 <Text>
                     Fecha: {fecha}
