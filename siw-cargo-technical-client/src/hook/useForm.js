@@ -13,15 +13,19 @@ export const useForm = (initialForm = {}) => {
             ...formState,
             [name]: value
         })
-        setError(validate({ ...formState, [name]: value }))
+        setError(validate({
+            ...formState,
+            [name]: value
+        }))
     }
 
 
     const validate = (formState) => {
-        let error = {}
-        //verificar campos vacios
+        let error = false
+        console.log([formState])
+
         if ([formState].length === 0) {
-            return error
+            error = true
         }
         return error
     }

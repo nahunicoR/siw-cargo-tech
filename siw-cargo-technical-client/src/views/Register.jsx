@@ -7,16 +7,66 @@ import { useForm } from '../hook/useForm'
 import { register } from '../services/services';
 import { useNavigate } from 'react-router-dom';
 
+const validate = (input) => {
+    let errors = {};
+
+    if (!input.name) {
+        errors.name = 'Nombre requerido';
+    }
+
+    if (!input.username) {
+        errors.username = 'Usuario requerido';
+    }
+
+    if (!input.password) {
+        errors.password = 'Contraseña requerida';
+    }
+    return errors;
+};
+
 
 const Register = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
 
-    const { name, username, password, onInputChange, onResetForm, error } = useForm({
-        name: '',
-        username: '',
-        password: '',
+    const [input, setInput] = useState({
+        name: "",
+        username: "",
+        password: "",
+    });
+    const [errors, setErrors] = useState({
+        name: "",
+        username: "",
+        password: "",
     });
 
-    const [loading, setLoading] = useState(false)
+    const handleInput = (e) => {
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value,
+        });
+        setErrors(
+            validate({
+                ...input,
+                [e.target.name]: e.target.value,
+            })
+        );
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const data = await register(input);
+            navigate('/');
+            setInput({
+                name: "",
+                username: "",
+                password: "",
+            })
+        } catch (error) {
+            navigate('/registro');
+        }
+    }
 
     useEffect(() => {
         setLoading(true)
@@ -24,22 +74,6 @@ const Register = () => {
             setLoading(false)
         }, 2500)
     }, [])
-
-    // const [error, setError] = useState(false);
-    const navigate = useNavigate();
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const data = await register({ name, username, password });
-            navigate('/');
-            onResetForm();
-            console.log(data);
-        } catch (error) {
-            console.log({ error });
-        }
-    }
 
     return (
         <>
@@ -89,7 +123,8 @@ const Register = () => {
                                         >
                                             Nombre
                                         </FormLabel>
-                                        <Input type='text' name={'name'} id='name' value={name} onChange={onInputChange} required />
+                                        <Input type='text' name={'name'} id='name' value={input.name} onChange={handleInput} required />
+                                        {errors.name && <Text color={"red.500"} fontSize={'sm'}>{errors.name}</Text>}
                                     </FormControl>
                                     <FormControl isRequired>
                                         <FormLabel
@@ -97,14 +132,16 @@ const Register = () => {
                                         >
                                             Usuario
                                         </FormLabel>
-                                        <Input type='text' name={'username'} id='username' value={username} onChange={onInputChange} required />
+                                        <Input type='text' name={'username'} id='username' value={input.username} onChange={handleInput} required />
+                                        {errors.username && <Text color={"red.500"} fontSize={'sm'}>{errors.username}</Text>}
                                     </FormControl>
                                     <FormControl isRequired>
                                         <FormLabel
                                             htmlFor='password'>
                                             Contraseña
                                         </FormLabel>
-                                        <Input type='password' name={'password'} id='password' value={password} onChange={onInputChange} required />
+                                        <Input type='password' name={'password'} id='password' value={input.password} onChange={handleInput} required />
+                                        {errors.password && <Text color={"red.500"} fontSize={'sm'}>{errors.password}</Text>}
                                     </FormControl>
                                     <Button
                                         type='submit'
