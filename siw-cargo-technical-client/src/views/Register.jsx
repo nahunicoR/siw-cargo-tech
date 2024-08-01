@@ -3,7 +3,6 @@
 import { Container, Box, Input, Card, Text, Button, FormControl, FormLabel, CircularProgress, Center } from '@chakra-ui/react';
 import image from '../assets/background.jpg';
 import { useState, useEffect } from 'react';
-import { useForm } from '../hook/useForm'
 import { register } from '../services/services';
 import { useNavigate } from 'react-router-dom';
 
@@ -83,7 +82,6 @@ const Register = () => {
                         <CircularProgress isIndeterminate color='green.300' />
                     </Center>
                     :
-
                     <Box
                         width={"100vw"}
                         height="100vh"
