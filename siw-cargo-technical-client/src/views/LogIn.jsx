@@ -1,28 +1,19 @@
 /*eslint-disable no-unused-vars*/
 import { Container, Box, Input, Card, Text, Button, FormControl, FormLabel, Center, CircularProgress } from '@chakra-ui/react';
 import image from '../assets/sun.jpg';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { login, setToken } from '../services/services';
-
-const validate = (input) => {
-    let errors = {};
-
-    if (!input.username) {
-        errors.username = 'Usuario requerido';
-    }
-
-    if (!input.password) {
-        errors.password = 'Password requerido';
-    }
-    return errors;
-};
+import { login } from '../services/services';
+import { validate } from '../utils/validate'
+import { UserContext } from '../context/user.jsx';
 
 
 const LogIn = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const { user, setUser } = useContext(UserContext);
 
-    const [loading, setLoading] = useState(false)
 
     const [input, setInput] = useState({
         username: "",
@@ -46,21 +37,17 @@ const LogIn = () => {
         );
     };
 
-    const navigate = useNavigate();
-
     const onLogin = async (e) => {
         e.preventDefault();
         try {
             const userData = await login(input)
             window.localStorage.setItem('loggedUser', JSON.stringify(userData))
-            setToken(userData.token)
-            navigate(`/facturas`, {
-                replace: true,
-                state: {
-                    username: input.username,
-                    logged: true
-                }
+            setUser({
+                nombre: userData.nombre,
+                username: userData.username,
+                token: userData.token
             })
+            navigate(`/facturas`)
             setInput({
                 username: "",
                 password: "",

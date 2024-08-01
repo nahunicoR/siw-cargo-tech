@@ -1,25 +1,26 @@
 /*eslint-disable no-unused-vars*/
 
 import { Flex, Center, Box, Text, Button, CircularProgress } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { getFacturas } from '../services/services.js';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import FacturaCard from '../components/FacturaCard.jsx'
+import FacturaCard from './FacturaCard.jsx'
+import { UserContext } from '../context/user.jsx';
 
 
 
 const Perfil = () => {
     const [facturas, setFacturas] = useState([])
-    const [user, setUser] = useState({})
+    const { user, setUser } = useContext(UserContext)
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
         setLoading(true)
-        const user = JSON.parse(localStorage.getItem('loggedUser'))
-        getFacturas(user.token).then(res => setFacturas(res))
-        setUser(user)
+        const userData = JSON.parse(window.localStorage.getItem('loggedUser'))
+        setUser(userData)
+        getFacturas(userData.token).then(res => setFacturas(res))
         setTimeout(() => {
             setLoading(false)
         }, 2500)
@@ -62,17 +63,7 @@ const Perfil = () => {
                                     marginTop={'10%'}
                                     marginBottom={'10%'}
                                 >
-                                    Bienvenido aquí podrás ver tus facturas
-                                </Text>
-                                <Text
-                                    color={'gray.600'}
-                                    fontSize={'3xl'}
-                                    textAlign={'center'}
-                                    marginBottom={'10%'}
-                                    textDecoration={'underline'}
-                                    textShadow={'2px 2px 4px #000000'}
-                                >
-                                    {user.nombre}
+                                    Bienvenido {user.nombre} aquí podrás ver tus facturas
                                 </Text>
                             </Box>
                             <Button
@@ -113,11 +104,11 @@ const Perfil = () => {
 
                                     <FacturaCard
                                         key={factura.idfactura}
-                                        cliente={factura.cliente}
+                                        cliente={user.nombre}
+                                        username={user.username}
                                         total={factura.total}
                                         fecha={factura.fecha}
                                     />
-
                                 ))}
                             </Box>
                         </Box>

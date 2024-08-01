@@ -5,7 +5,6 @@ import LogIn from './views/LogIn';
 import UpdateUser from './views/UpdateUser';
 import Register from './views/Register'
 import { Routes, Route } from 'react-router-dom';
-import { PrivateRoute } from './router/PrivateRoute';
 import Perfil from './views/Perfil';
 
 
@@ -16,12 +15,9 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<LogIn />} />
+        <Route path='/facturas' element={<Perfil />} />
         <Route path='/actualizar-usuario' element={<UpdateUser />} />
         <Route path='/registro' element={<Register />} />
-        <Route path='/facturas' element={
-          <PrivateRoute>
-            <Perfil />
-          </PrivateRoute>} />
       </Routes>
 
     </>

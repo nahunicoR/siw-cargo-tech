@@ -3,7 +3,7 @@
 import { Card, Text } from '@chakra-ui/react';
 
 
-const FacturaCard = ({ total, fecha }) => {
+const FacturaCard = ({ total, fecha, cliente, username }) => {
 
     return (
 
@@ -22,6 +22,12 @@ const FacturaCard = ({ total, fecha }) => {
             >
                 <Text>
                     Fecha: {fecha}
+                </Text>
+                <Text>
+                    usuario: {username}
+                </Text>
+                <Text>
+                    Nombre: {cliente}
                 </Text>
 
                 <Text
